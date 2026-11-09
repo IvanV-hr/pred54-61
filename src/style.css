@@ -893,3 +893,59 @@ footer {
   flex-wrap: wrap;
   gap: 0.4rem;
 }
+
+.kartica-sadrzaj button {
+  font: inherit;
+}
+
+.kartice-vozila .u-usporedbi {
+  outline: 3px solid var(--tamna);
+}
+
+.gumb-ukloni {
+  background: var(--tekst);
+  border-color: var(--tekst);
+}
+
+.gumb:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.usporedba-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--rub);
+  border-radius: 10px;
+  background: var(--bijela);
+  box-shadow: var(--box-shadow);
+}
+
+.tablica-usporedbe {
+  width: 100%;
+  min-width: 600px;
+  border-spacing: 0;
+}
+
+.tablica-usporedbe th,
+.tablica-usporedbe td {
+  padding: 15px;
+  border-bottom: 1px solid var(--rub);
+  text-align: center;
+}
+
+.tablica-usporedbe tbody th {
+  text-align: left;
+  color: var(--tamna);
+  background: var(--svijetla);
+}
+
+.tablica-usporedbe .kartica-slika {
+  height: 120px;
+  border-radius: 10px;
+}
+
+.tablica-usporedbe .najbolje {
+  font-weight: bold;
+  color: var(--tamna);
+  background: var(--rub);
+}

@@ -2,6 +2,8 @@ import slikaServisa from "../assets/servis.jpg";
 import slikaKocnica from "../assets/kocnice.jpg";
 import slikaDijagnostike from "../assets/dijagnostika.jpg";
 
+export const najviseAutaUsporedba = 3;
+
 export const kategorije = [
   {
     naslov: "Mali servis",

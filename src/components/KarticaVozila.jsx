@@ -1,8 +1,18 @@
 import { Link } from "react-router";
+import { Button } from "./Button";
+import { najviseAutaUsporedba } from "../konstante/constants";
 
-const KarticaVozila = ({ vozilo }) => {
+const KarticaVozila = ({ vozilo, usporedba, onUsporedi }) => {
+  const uUsporedbi = usporedba.some((odabrano) => odabrano.id === vozilo.id);
+
   return (
-    <div className="kartica kartica-vozila">
+    <div
+      className={
+        uUsporedbi
+          ? "kartica kartica-vozila u-usporedbi"
+          : "kartica kartica-vozila"
+      }
+    >
       <img
         className="kartica-slika"
         src={vozilo.thumbnail}
@@ -16,6 +26,13 @@ const KarticaVozila = ({ vozilo }) => {
         <Link className="gumb" to={`/vozila/${vozilo.id}`}>
           Detalji
         </Link>
+        <Button
+          className={uUsporedbi ? "gumb gumb-ukloni" : "gumb gumb-povratak"}
+          disabled={usporedba.length === najviseAutaUsporedba && !uUsporedbi}
+          onClick={() => onUsporedi(vozilo)}
+        >
+          {uUsporedbi ? "Uklonite iz usporedbe" : "Dodajte u usporedbu"}
+        </Button>
       </div>
     </div>
   );

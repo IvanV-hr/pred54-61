@@ -3,6 +3,8 @@ import { apiRequest } from "../api/api";
 import { Button } from "../components/Button";
 import KarticaVozila from "../components/KarticaVozila";
 import FilterVozila from "../components/FilterVozila";
+import { najviseAutaUsporedba } from "../konstante/constants";
+import UsporedbaVozila from "../components/UsporedbaVozila";
 
 const pocetniFilteri = {
   pojamPretrage: "",
@@ -19,6 +21,35 @@ const Vozila = () => {
   const [greska, setGreska] = useState("");
   const [brojPokusaja, setBrojPokusaja] = useState(0);
   const [filteri, setFilteri] = useState(pocetniFilteri);
+  const [usporedba, setUsporedba] = useState([]);
+
+  useEffect(() => {
+    async function dohvatiVozila() {
+      try {
+        const response = await apiRequest("/products/category/vehicle");
+        setVozila(response.products);
+      } catch {
+        setGreska("Prikaz vozila nije uspio. Pokušajte ponovo.");
+      } finally {
+        setUcitavanje(false);
+      }
+    }
+    dohvatiVozila();
+  }, [brojPokusaja]);
+
+  function pokusajPonovo() {
+    setUcitavanje(true);
+    setGreska("");
+    setBrojPokusaja(brojPokusaja + 1);
+  }
+
+  function promijeniUsporedbu(vozilo) {
+    if (usporedba.some((odabrano) => odabrano.id === vozilo.id)) {
+      setUsporedba(usporedba.filter((odabrano) => odabrano.id !== vozilo.id));
+    } else {
+      setUsporedba([...usporedba, vozilo]);
+    }
+  }
 
   function promijeniFilter(event) {
     setFilteri({ ...filteri, [event.target.name]: event.target.value });
@@ -57,56 +88,59 @@ const Vozila = () => {
     filtriranaVozila.sort((a, b) => b.rating - a.rating);
   }
 
-  useEffect(() => {
-    async function dohvatiVozila() {
-      try {
-        const response = await apiRequest("/products/category/vehicle");
-        setVozila(response.products);
-      } catch {
-        setGreska("Prikaz vozila nije uspio. Pokušajte ponovo.");
-      } finally {
-        setUcitavanje(false);
-      }
-    }
-    dohvatiVozila();
-  }, [brojPokusaja]);
-
-  function pokusajPonovo() {
-    setUcitavanje(true);
-    setGreska("");
-    setBrojPokusaja(brojPokusaja + 1);
-  }
-
   return (
-    <section className="section">
-      <h2>Auti na prodaju</h2>
-      <p>Pogledajte naše automobile.</p>
-      {ucitavanje && <p>Učitavanje vozila...</p>}
-      {greska && (
-        <>
-          <p>{greska}</p>
-          <Button onClick={pokusajPonovo}>Pokušajte ponovo</Button>
-        </>
+    <>
+      <section className="section">
+        <h2>Auti na prodaju</h2>
+        <p>Pogledajte naše automobile.</p>
+        {ucitavanje && <p>Učitavanje vozila...</p>}
+        {greska && (
+          <>
+            <p>{greska}</p>
+            <Button onClick={pokusajPonovo}>Pokušajte ponovo</Button>
+          </>
+        )}
+        <FilterVozila
+          filteri={filteri}
+          marke={markeVozilaFilter}
+          onPromjeni={promijeniFilter}
+          onPonisti={() => setFilteri(pocetniFilteri)}
+        />
+        {!ucitavanje && !greska && (
+          <p>
+            {filtriranaVozila.length === 0
+              ? "Nema vozila za odabrane filtere."
+              : `Broj pronađenih vozila za odabrane filtere: ${filtriranaVozila.length}`}
+          </p>
+        )}
+        {!!usporedba.length && (
+          <p>
+            Odabrano za usporedbu: {usporedba.length} od {najviseAutaUsporedba}.
+            <a href="#usporedba">Otvorite Usporedbu</a>
+          </p>
+        )}
+        {usporedba.length === najviseAutaUsporedba && (
+          <p>Usporedba je puna. Uklonite auto da biste dodali drugi.</p>
+        )}
+        <div className="kartice kartice-vozila">
+          {filtriranaVozila.map((vozilo) => (
+            <KarticaVozila
+              key={vozilo.id}
+              vozilo={vozilo}
+              onUsporedi={promijeniUsporedbu}
+              usporedba={usporedba}
+            />
+          ))}
+        </div>
+      </section>
+      {!!usporedba.length && (
+        <UsporedbaVozila
+          usporedba={usporedba}
+          onUkloni={promijeniUsporedbu}
+          onOcisti={() => setUsporedba([])}
+        />
       )}
-      <FilterVozila
-        filteri={filteri}
-        marke={markeVozilaFilter}
-        onPromjeni={promijeniFilter}
-        onPonisti={() => setFilteri(pocetniFilteri)}
-      />
-      {!ucitavanje && !greska && (
-        <p>
-          {filtriranaVozila.length === 0
-            ? "Nema vozila za odabrane filtere."
-            : `Broj pronađenih vozila za odabrane filtere: ${filtriranaVozila.length}`}
-        </p>
-      )}
-      <div className="kartice kartice-vozila">
-        {filtriranaVozila.map((vozilo) => (
-          <KarticaVozila key={vozilo.id} vozilo={vozilo} />
-        ))}
-      </div>
-    </section>
+    </>
   );
 };
 
