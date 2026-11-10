@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import NotFound from "./NotFound";
 import GalerijaVozila from "../components/GalerijaVozila";
 import KomentarVozila from "../components/KomentarVozila";
+import KalkulatorRata from "../components/KalkulatorRata";
 
 const DetaljiVozila = () => {
   const { id } = useParams();
@@ -43,6 +44,7 @@ const DetaljiVozila = () => {
   return (
     <>
       <GalerijaVozila vozilo={vozilo} />
+      <KalkulatorRata cijenaVozila={vozilo.price} />
       <section className="section">
         <h2>Recenzije kupaca</h2>
         <ul className="komentari">

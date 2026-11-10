@@ -88,8 +88,36 @@ const Vozila = () => {
     filtriranaVozila.sort((a, b) => b.rating - a.rating);
   }
 
+  const najboljeOcijenjenoVozilo = vozila.reduce(
+    (najbolje, vozilo) => (vozilo.rating > najbolje.rating ? vozilo : najbolje),
+    vozila[0],
+  );
+  const najjeftinijeVozilo = vozila.reduce(
+    (najjeftinije, vozilo) =>
+      vozilo.price < najjeftinije.price ? vozilo : najjeftinije,
+    vozila[0],
+  );
+
   return (
     <>
+      {vozila.length > 0 && (
+        <section className="section">
+          <h2>Izdvojeno iz ponude</h2>
+          <p>Auto s najboljom ocjenom i najjeftiniji auto u ponudi.</p>
+          <div className="kartice kartice-vozila">
+            <KarticaVozila
+              vozilo={najboljeOcijenjenoVozilo}
+              usporedba={usporedba}
+              onUsporedi={promijeniUsporedbu}
+            />
+            <KarticaVozila
+              vozilo={najjeftinijeVozilo}
+              usporedba={usporedba}
+              onUsporedi={promijeniUsporedbu}
+            />
+          </div>
+        </section>
+      )}
       <section className="section">
         <h2>Auti na prodaju</h2>
         <p>Pogledajte naše automobile.</p>

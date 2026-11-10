@@ -949,3 +949,113 @@ footer {
   color: var(--tamna);
   background: var(--rub);
 }
+
+.kalkulator-rata {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.kalkulator-tablica {
+  flex: 1 1 300px;
+  background: var(--bijela);
+  border: 1px solid var(--rub);
+  border-radius: 10px;
+  overflow: hidden;
+  border-spacing: 0;
+}
+
+.kalkulator-tablica th,
+.kalkulator-tablica td {
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.kalkulator-tablica th {
+  background: var(--tamna);
+  color: var(--bijela);
+}
+
+.kalkulator-tablica th:last-child,
+.kalkulator-tablica td:last-child {
+  text-align: right;
+  font-weight: bold;
+}
+
+.kalkulator-tablica tbody tr:nth-child(even) {
+  background: var(--svijetla);
+}
+
+.iznos-otplate {
+  margin-bottom: 0;
+}
+
+.kartica-motocikla {
+  flex: 1 1 400px;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+}
+
+.motocikl-slika {
+  position: relative;
+  flex: 1 1 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background: var(--svijetla);
+}
+
+.motocikl-slika img {
+  width: 100%;
+  max-height: 180px;
+  object-fit: contain;
+}
+
+.motocikl-oznaka {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--bijela);
+  background: var(--tamna);
+}
+
+.motocikl-sadrzaj {
+  flex: 1 1 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 25px;
+  color: var(--bijela);
+  background: var(--tekst);
+}
+
+.motocikl-sadrzaj p,
+.motocikl-sadrzaj h3 {
+  margin: 0;
+}
+
+.motocikl-marka {
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--rub);
+}
+
+.motocikl-cijena {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.motocikl-sadrzaj .gumb {
+  color: var(--bijela);
+  border-color: var(--rub);
+  background: transparent;
+}
