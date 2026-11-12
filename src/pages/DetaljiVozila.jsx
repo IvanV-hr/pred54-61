@@ -3,8 +3,8 @@ import { apiRequest } from "../api/api";
 import { useEffect, useState } from "react";
 import NotFound from "./NotFound";
 import GalerijaVozila from "../components/GalerijaVozila";
-import KomentarVozila from "../components/KomentarVozila";
 import KalkulatorRata from "../components/KalkulatorRata";
+import RecenzijeVozila from "../components/RecenzijeVozila";
 
 const DetaljiVozila = () => {
   const { id } = useParams();
@@ -45,17 +45,7 @@ const DetaljiVozila = () => {
     <>
       <GalerijaVozila vozilo={vozilo} />
       <KalkulatorRata cijenaVozila={vozilo.price} />
-      <section className="section">
-        <h2>Recenzije kupaca</h2>
-        <ul className="komentari">
-          {vozilo.reviews.map((recenzija) => (
-            <KomentarVozila
-              key={recenzija.reviewerEmail}
-              recenzija={recenzija}
-            />
-          ))}
-        </ul>
-      </section>
+      <RecenzijeVozila recenzije={vozilo.reviews} />
     </>
   );
 };

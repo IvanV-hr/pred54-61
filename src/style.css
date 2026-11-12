@@ -220,7 +220,7 @@ main {
   flex-direction: column;
 }
 
-/* zajednicko */
+/* main */
 .section {
   margin: 2rem 0;
 }
@@ -321,46 +321,6 @@ textarea:focus {
   color: green;
   font-weight: bold;
   margin: 0;
-}
-
-/* footer */
-footer {
-  color: var(--tekst);
-  background: var(--bijela);
-  margin-top: 25px;
-  border-top: 1px solid var(--rub);
-}
-
-.footer-wrapper {
-  width: 90%;
-  max-width: 1100px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-  padding: 12px;
-}
-
-.footer-linkovi {
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.footer-linkovi a:hover,
-.header-linkovi a:hover {
-  text-decoration: underline;
-}
-
-.footer-logo {
-  text-decoration: none;
-}
-
-@media (max-width: 799px) {
-  .footer-wrapper {
-    flex-direction: column;
-  }
 }
 
 .kartica-usluga,
@@ -1058,4 +1018,72 @@ footer {
   color: var(--bijela);
   border-color: var(--rub);
   background: transparent;
+}
+
+.recenzije {
+  padding: 20px;
+  background: var(--bijela);
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--rub);
+  border-radius: 10px;
+}
+
+.recenzije-ocjene {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0 0 0.5rem;
+  padding: 0;
+  list-style-type: none;
+}
+
+.recenzije-ocjene li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.recenzije-ocjene progress {
+  flex: 1;
+  height: 20px;
+}
+
+/* footer */
+footer {
+  color: var(--tekst);
+  background: var(--bijela);
+  margin-top: 25px;
+  border-top: 1px solid var(--rub);
+}
+
+.footer-wrapper {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 12px;
+}
+
+.footer-linkovi {
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.footer-linkovi a:hover,
+.header-linkovi a:hover {
+  text-decoration: underline;
+}
+
+.footer-logo {
+  text-decoration: none;
+}
+
+@media (max-width: 799px) {
+  .footer-wrapper {
+    flex-direction: column;
+  }
 }
